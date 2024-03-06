@@ -13,16 +13,24 @@
 
 // username: (user that created thought)
 
-// reactions: 
+// reactions: [Reaction],
 
-// schema settings = create virtual called "reactionCount" that retrieves length of thought's "reactions" array
+// allows virtuals to be included w/ res
+// {
+//     toJSON: {
+//       virtuals: true,
+//     },
+//     id: false,
+//   }
 
-// array methods that retrieve length of array???
-// function that takes in arr and measures it using for of loop, returns the value using a variable?
-// let reactions = [reactionsArr];
-// for (i = 0; i < reactions.length; i++){
-    // return reactions[i];
-// }; ???
+// TODO: schema settings = create virtual called "reactionCount" that retrieves length of thought's "reactions" array
+
+// thoughtSchema
+//   .virtual('reactionCount')
+//   // getter
+//   .get(function () {
+//     return this.reactions.length;
+//   });
 
 // initialize model
 // const Thought = model('thought', thoughtSchema);
