@@ -11,7 +11,7 @@
 
 // createdAt:
 
-// userName: (user that created thought)
+// username: (user that created thought)
 
 // reactions: 
 

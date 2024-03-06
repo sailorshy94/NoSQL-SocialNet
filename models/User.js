@@ -7,6 +7,11 @@
 
 // TODO: add properties: 
 
+// username:
+
+// email:
+
+// 
 
 // initialize model
 // const User = model('user', userSchema);
