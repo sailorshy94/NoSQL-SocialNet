@@ -8,8 +8,11 @@
 // TODO: add properties: 
 
 // thoughtText:
-
-// createdAt:
+  
+// createdAt: {
+//       type: Date,
+//       default: Date.now,
+//     },
 
 // username: (user that created thought)
 
