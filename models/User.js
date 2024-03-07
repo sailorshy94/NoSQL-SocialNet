@@ -1,5 +1,6 @@
 // Schema to create User model
 const { Schema, model } = require('mongoose');
+// import Thought model
 const Thought = require('./Thought');
 
 // Schema to create User model
@@ -27,8 +28,8 @@ const userSchema = new Schema({
     // (arr of _id vals ref the "User" model (self-reference))
     friends: [
         {
-            type: Schema.types.ObjectId,
-
+            type: Schema.Types.ObjectId,
+            ref: 'user'
         }
     ],
     // allows virtuals to be included w/ res

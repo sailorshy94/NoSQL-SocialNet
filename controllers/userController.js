@@ -1,20 +1,57 @@
-// TODO: use async/await and try...catch blocks to create methods for:
-
 // '/api/users endpoint'
+const User = require('../models/User');
 
-// const User = require('../models/User');
+module.exports = {
+    async getAllUsers(req, res) {
+        try {
+            const usersData = await User.find();
+            res.json(usersData);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    async getOneUser(req, res) {
+        try {
+            const user = await User.findOne({ _id: req.params.userId })
+                .select('-__v');
 
-// module.exports = {
-// all methods will go in here
-// };
+            if (!user) {
+                return res.status(404).json({ message: 'No user with that ID.' });
+            }
 
-// GET all users
+            res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    async newUser(req, res) {
+        try {
+            const dbNewUser = await User.create(req.body);
+            res.json(dbNewUser);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+},
+async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        // makes sure that user fields are formatted properly before response
+        { runValidators: true, new: true }
+      );
 
-// GET single user by _id
+      if (!user) {
+        return res.status(404).json({ message: 'This user does not exist!' });
+      }
 
-// POST new user
-
-// PUT update user by _id
+      res.json(user);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+};
 
 // DELETE remove user by _id
 
@@ -30,26 +67,4 @@ async methodName (req, res) {
 };
 
 *****TODO: make sure have an err for if any required data is left blank!!!
-
-Mongoose validation for email address using phone number ex from online docs
-const User = db.model('user', userSchema);
-const user = new User();
-let error;
-
-user.phone = '555.0123';
-error = user.validateSync();
-assert.equal(error.errors['phone'].message,
-  '555.0123 is not a valid phone number!');
-
-  ???????????
-function validateEmail() {
-    const User = db.model('user', userSchema);
-    const user = new User();
-    let error;
-
-    user.email = `${user.email}`;
-    error = user.validateSync();
-    assert.equal(error.errors['email'].message,
-        'Please enter a valid email address!')
-}
 */
