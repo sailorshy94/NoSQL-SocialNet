@@ -29,4 +29,15 @@ async methodName (req, res) {
     }
 };
 
+*****TODO: make sure have an err for if any required data is left blank!!!
+
+Mongoose validation for email address using phone number ex from online docs
+const User = db.model('user', userSchema);
+const user = new User();
+let error;
+
+user.phone = '555.0123';
+error = user.validateSync();
+assert.equal(error.errors['phone'].message,
+  '555.0123 is not a valid phone number!');
 */
