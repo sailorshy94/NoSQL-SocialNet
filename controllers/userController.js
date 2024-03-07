@@ -40,4 +40,16 @@ user.phone = '555.0123';
 error = user.validateSync();
 assert.equal(error.errors['phone'].message,
   '555.0123 is not a valid phone number!');
+
+  ???????????
+function validateEmail() {
+    const User = db.model('user', userSchema);
+    const user = new User();
+    let error;
+
+    user.email = `${user.email}`;
+    error = user.validateSync();
+    assert.equal(error.errors['email'].message,
+        'Please enter a valid email address!')
+}
 */

@@ -1,6 +1,6 @@
 // Schema to create User model
-
-// const { Schema, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
+const Thought = require('./Thought');
 
 // Schema to create User model
 const userSchema = new Schema({
@@ -22,32 +22,26 @@ const userSchema = new Schema({
             message: 'Please enter valid email address',
         },
     },
-        toJSON: {
-            virtuals: true,
-        },
-        id: false,
-    }
-);
+    // (arr of _id vals ref the "Thought" model)
+    thoughts: [Thought],
+    // (arr of _id vals ref the "User" model (self-reference))
+    friends: [],
+    // allows virtuals to be included w/ res
+    toJSON: {
+        virtuals: true,
+    },
+    id: false,
+});
 
-// TODO: add properties:
-
-
-// thoughts: [Thought],???  (arr of _id vals ref the "Thought" model)
-
-// friends: [User], ??? (arr of _id vals ref the "User" model (self-reference))
-
-// allows virtuals to be included w/ res
-
-// TODO: schema settings = virtual property "friendCount" that retreives length of the user's "friends" arr
-
-// userSchema
-//   .virtual('friendCount')
-//   // getter
-//   .get(function () {
-//     return this.friends.length;
-//   });
+// schema settings = virtual property "friendCount" that retreives length of the user's "friends" arr
+userSchema
+    .virtual('friendCount')
+    // getter
+    .get(function () {
+        return this.friends.length;
+    });
 
 // initialize model
-// const User = model('user', userSchema);
+const User = model('user', userSchema);
 
-// module.exports = User;
+module.exports = User;
