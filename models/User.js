@@ -28,7 +28,7 @@ const userSchema = new Schema({
     friends: [
         {
             type: Schema.types.ObjectId,
-            
+
         }
     ],
     // allows virtuals to be included w/ res
