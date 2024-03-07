@@ -17,7 +17,7 @@ const userSchema = new Schema({
         // validate email adress is properly formatted using a regular expression; validate property cks if matches
         validate: {
             validator: function (val) {
-                return /^[^\s@][a-zA-Z0-9._-]+@[a-zA-Z0-9.-]\.[a-zA-Z]{2,4}$/.test(val);
+                return /^[^\s@][a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(val);
             },
             message: 'Please enter valid email address',
         },
