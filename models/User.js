@@ -25,7 +25,12 @@ const userSchema = new Schema({
     // (arr of _id vals ref the "Thought" model)
     thoughts: [Thought],
     // (arr of _id vals ref the "User" model (self-reference))
-    friends: [],
+    friends: [
+        {
+            type: Schema.types.ObjectId,
+            
+        }
+    ],
     // allows virtuals to be included w/ res
     toJSON: {
         virtuals: true,

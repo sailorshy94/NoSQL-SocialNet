@@ -1,6 +1,5 @@
 // Schema to create Thought model
-
-// const { Schema, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // Schema to create Thought model
 // const thoughtSchema = new Schema({});
@@ -36,6 +35,6 @@
 //   });
 
 // initialize model
-// const Thought = model('thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
-// module.exports = Thought;
+module.exports = Thought;
