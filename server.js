@@ -1,15 +1,15 @@
 const express = require('express'); 
-// TODO: add import for db 
-// const db = require(''); 
-// TODO: add import for routes
-// const routes = require('');
+// import for db 
+const db = require('./configuration/connection'); 
+// import for routes
+const routes = require('./routes');
 
 const PORT = 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(routes);
+app.use(routes);
 
 // functions like the sequelize start, db connection
 db.once('open', () => { 

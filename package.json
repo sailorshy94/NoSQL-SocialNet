@@ -1,11 +1,12 @@
-{
-    "name": "nosql-socialnet",
+  {
+    "name": "nosql-socialnetwork",
     "version": "1.0.1",
+    "description": "module 18 challenge assignment",
     "main": "server.js",
+    "license": "MIT",
     "scripts": {
       "start": "node index",
-      "dev": "nodemon index",
-      "seed": "node utils/seed"
+      "dev": "nodemon index"
     },
     "dependencies": {
       "express": "^4.17.1",
