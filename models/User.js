@@ -35,6 +35,7 @@ const userSchema = new Schema({
     // allows virtuals to be included w/ res
     toJSON: {
         virtuals: true,
+        getters: true,
     },
     id: false,
 });
