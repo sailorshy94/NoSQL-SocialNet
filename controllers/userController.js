@@ -54,11 +54,10 @@ module.exports = {
         }
     },
     // delete user using _id value
+    // TODO: bonus if delete user also deletes associated thoughts!!!
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete(
-
-            );
+            const user = await User.findOneAndDelete({ _id: req.params.userId});
             if (!user) {
                 return res.status(404).json({ message: 'This user does not exist!' });
             }
@@ -71,3 +70,9 @@ module.exports = {
         }
     }
 };
+
+/* TODO: need to have POST add new friend
+        newFriend()
+         need to have DELETE remove friend from list
+         removeFriend()
+         via A "DO THESE LAST" */
