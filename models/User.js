@@ -35,8 +35,8 @@ const userSchema = new Schema({
     // allows virtuals to be included w/ res
     toJSON: {
         virtuals: true,
+        id: false,
     },
-    id: false,
 });
 
 // schema settings = virtual property "friendCount" that retreives length of the user's "friends" arr
