@@ -1,18 +1,33 @@
-// TODO: use async/await and try...catch blocks to create methods for:
+const Thought = require('../models/Thought');
 
-// '/api/thoughts endpoint'
-
-// const Thought = require('../models/Thought');
-
-// module.exports = {
-// all methods will go in here
-// };
-
+module.exports = {
 // GET all thoughts
-
+async getAllThoughts(req, res) {
+    try {
+        const thoughtsData = await Thought.find();
+        res.json(thoughtsData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+},
 // GET single thought by _id
+async getOneThought(req, res) {
+    try {
+        const thought = await Thought.findOne({ _id: req.params.thoughtId })
+            .select('-__v');
 
+        if (!thought) {
+            return res.status(404).json({ message: 'No thought with that ID.' });
+        }
+        res.json(thought);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+},
 // POST new thought (IMPORTANT: push created thought's _id to assoc user's thoughts array field)
+
+};
+
 
 // PUT update thought by _id
 
