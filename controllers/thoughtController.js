@@ -68,11 +68,29 @@ module.exports = {
     // DELETE remove thought by _id
     async removeThought(req, res) {
         try {
-            const thought 
-        } catch {
+            const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
 
-        }
-    } 
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought found with this id!' });
+            }
+            // also have to reference user attached to thought
+            const user = await User.findOneUpdate(
+                { thoughts: req.params.thoughtId },
+                { $pull: { thoughts: req.params.thoughtId } },
+                { new: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({
+                    message: 'Thought was added, but no user exists with that ID',
+                });
+            }
+                // added in a success msg for deletion
+            res.json({ message: 'User successfully deleted.' });
+            } catch {
+
+            }
+        } 
 };
 
 

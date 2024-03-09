@@ -61,9 +61,8 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'This user does not exist!' });
             }
-            res.json(user);
-            // added in a success msg for deletion
-            console.log('SUCCESS DELETE MSG', 'User successfully deleted.')
+            // added in success msg for deletion
+            res.json({ message: 'User successfully deleted.' });
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
