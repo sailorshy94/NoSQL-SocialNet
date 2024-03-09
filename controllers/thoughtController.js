@@ -85,12 +85,13 @@ module.exports = {
                     message: 'Thought was added, but no user exists with that ID',
                 });
             }
-                // added in a success msg for deletion
-            res.json({ message: 'User successfully deleted.' });
-            } catch {
-
-            }
-        } 
+            // added in a success msg for deletion
+            res.json({ message: 'Thought successfully removed.' });
+        } catch {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    }
 };
 
 
