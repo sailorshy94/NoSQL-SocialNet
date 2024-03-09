@@ -2,16 +2,34 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create Thought model
-// const thoughtSchema = new Schema({});
+const thoughtSchema = new Schema({
+    thoughtText: {
+        type: String,
+        required: true,
+        minlength: [1, 'Must be at least one character, got {VALUE}'],
+        maxlength: 280,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        // TODO: use getter method to format timestamp on query??
+    },
+    username: {
+        type: String,
+        required: true,
+
+    },
+
+},
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true,
+        },
+        id: false,
+    });
 
 // TODO: add properties: 
-
-// thoughtText:
-  
-// createdAt: {
-//       type: Date,
-//       default: Date.now,
-//     },
 
 // username: (user that created thought)
 
