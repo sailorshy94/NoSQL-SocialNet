@@ -2,6 +2,7 @@
 const User = require('../models/User');
 
 module.exports = {
+    // retrieves all users data
     async getAllUsers(req, res) {
         try {
             const usersData = await User.find();
@@ -10,6 +11,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // retrieves one user data
     async getOneUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.userId })
@@ -18,12 +20,12 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID.' });
             }
-
             res.json(user);
         } catch (err) {
             res.status(500).json(err);
         }
     },
+    // creates a new user
     async newUser(req, res) {
         try {
             const dbNewUser = await User.create(req.body);
@@ -31,40 +33,41 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
-},
-async updateUser(req, res) {
-    try {
-      const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $set: req.body },
-        // makes sure that user fields are formatted properly before response
-        { runValidators: true, new: true }
-      );
+    },
+    // edit user data
+    async updateUser(req, res) {
+        try {
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $set: req.body },
+                // makes sure that user fields are formatted properly before response
+                { runValidators: true, new: true }
+            );
 
-      if (!user) {
-        return res.status(404).json({ message: 'This user does not exist!' });
-      }
+            if (!user) {
+                return res.status(404).json({ message: 'This user does not exist!' });
+            }
+            res.json(user);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
+    // delete user using _id value
+    async deleteUser(req, res) {
+        try {
+            const user = await User.findOneAndDelete(
 
-      res.json(user);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
+            );
+            if (!user) {
+                return res.status(404).json({ message: 'This user does not exist!' });
+            }
+            res.json(user);
+            // added in a success msg for deletion
+            console.log('SUCCESS DELETE MSG', 'User successfully deleted.')
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
     }
-  },
 };
-
-// DELETE remove user by _id
-
-// structure =
-/*
-async methodName (req, res) {
-    try {
-        const = await 
-        res.json();
-    } catch (err) {
-        res.status().json(err);
-    }
-};
-
-*****TODO: make sure have an err for if any required data is left blank!!!
-*/
