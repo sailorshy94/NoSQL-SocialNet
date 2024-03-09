@@ -47,10 +47,32 @@ module.exports = {
         }
     },
     // updates thought by _id
-    // async updateThought(req,res)
+    async updateThought(req, res) {
+        try {
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $set: req.body },
+                // makes sure that thought fields are formatted properly before response
+                { runValidators: true, new: true }
+            );
 
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought found with this id!' });
+            }
+            res.json(thought);
+        } catch {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
     // DELETE remove thought by _id
-    // removeThought(req, res)
+    async removeThought(req, res) {
+        try {
+            const thought 
+        } catch {
+
+        }
+    } 
 };
 
 
