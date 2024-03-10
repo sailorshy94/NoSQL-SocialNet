@@ -67,9 +67,15 @@ module.exports = {
             console.log(err);
             res.status(500).json(err);
         }
-    }
-};
+    },
+    // async addFriend(req, res) {
+    //     try {
+    //         const user = await User.create(req.body);
+    //     } catch {
 
+    //     }
+    // }
+};
 /* TODO: need to have POST add new friend
         newFriend()
          need to have DELETE remove friend from list
