@@ -92,7 +92,40 @@ module.exports = {
             console.log(err);
             res.status(500).json(err);
         }
-    }
+    },
+    async addReaction(req, res) {
+        try {
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: req.body } },
+                { runValidatiors: true, new: true }
+            );
+
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought with this id!' })
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
+    async removeReaction(req, res) {
+        try {
+            const thought = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                // mongodb docs = The pull operator removes from an existing array all instances of a value or values that match a specified condition
+                { $pull: { reactions: { reactionId: req.params.reactionId } } },
+                { runValidatiors: true, new: true }
+            );
+
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought with this id!' })
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
 };
 
 
