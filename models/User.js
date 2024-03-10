@@ -15,6 +15,8 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Email address is required'],
         unique: true,
+        // ensure email address is lowercase
+        lowercase: [true, 'Email address must be lowercase'],
         // validate email adress is properly formatted using a regular expression; validate property cks if matches
         validate: {
             validator: function (val) {
