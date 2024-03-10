@@ -18,7 +18,7 @@ module.exports = {
                 .select('-__v');
 
             if (!user) {
-                return res.status(404).json({ message: 'No user with that ID.' });
+                return res.status(404).json({ message: 'No user with that id.' });
             }
             res.json(user);
         } catch (err) {
@@ -54,7 +54,7 @@ module.exports = {
         }
     },
     // delete user using _id value
-    // TODO: bonus if delete user also deletes associated thoughts!!!
+    // bonus if delete user also deletes associated thoughts!!!
     async deleteUser(req, res) {
         try {
             const user = await User.findOneAndDelete({ _id: req.params.userId});
@@ -68,16 +68,46 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // async addFriend(req, res) {
-    //     try {
-    //         const user = await User.create(req.body);
-    //     } catch {
+    async addFriend(req, res) {
+        try {
+            const friend = await User.create(req.body);
+            const user = await User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { friends: friend._id } },
+                { new: true }
+            );
+            if (!user) {
+                return res.status(404).json({
+                    message: 'Friend added, but no user exists with that id!'
+                })
+            }    
+            res.json('Friend added!');
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    },
+    async removefriend(req, res) {
+        try {
+            const friend = await User.findOneAndRemove({ _id: req.params.userId });
 
-    //     }
-    // }
+            if (!friend) {
+                return res.status(404).json({ message: 'No user exists with that id!' });
+            }
+
+            const user = await User.findOneAndUpdate(
+                { friends: req.params.friendId },
+                { $pull: { friends: req.params.videoId } },
+                { new: true }
+            );
+
+            if (!user) { 
+                return res.status(404).json({ message: 'Friend removed, but no user exists with that id!'})
+            }
+            res.json({ message: 'Friend successfully removed.' });
+        } catch (err) {
+            console.log(err);
+            res.status.(500).json(err);
+        }
+    }
 };
-/* TODO: need to have POST add new friend
-        newFriend()
-         need to have DELETE remove friend from list
-         removeFriend()
-         via A "DO THESE LAST" */

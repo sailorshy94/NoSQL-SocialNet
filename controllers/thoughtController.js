@@ -18,7 +18,7 @@ module.exports = {
                 .select('-__v');
 
             if (!thought) {
-                return res.status(404).json({ message: 'No thought with that ID.' });
+                return res.status(404).json({ message: 'No thought with that id.' });
             }
             res.json(thought);
         } catch (err) {
@@ -39,7 +39,7 @@ module.exports = {
 
             if (!user) {
                 return res.status(404).json({
-                    message: 'Thought was added, but no user exists with that ID',
+                    message: 'Thought was added, but no user exists with that id',
                 });
             }
             res.json('Thought succesfully added!!');
@@ -61,7 +61,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No thought found with this id!' });
             }
             res.json(thought);
-        } catch {
+        } catch (err) {
             console.log(err);
             res.status(500).json(err);
         }
@@ -83,12 +83,12 @@ module.exports = {
 
             if (!user) {
                 return res.status(404).json({
-                    message: 'Thought was added, but no user exists with that ID',
+                    message: 'Thought was removed, but no user exists with that id!',
                 });
             }
             // added in a success msg for deletion
             res.json({ message: 'Thought successfully removed.' });
-        } catch {
+        } catch (err) {
             console.log(err);
             res.status(500).json(err);
         }
