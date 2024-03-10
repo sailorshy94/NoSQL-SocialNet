@@ -57,7 +57,7 @@ module.exports = {
     // bonus if delete user also deletes associated thoughts!!!
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ _id: req.params.userId});
+            const user = await User.findOneAndDelete({ _id: req.params.userId });
             if (!user) {
                 return res.status(404).json({ message: 'This user does not exist!' });
             }
@@ -80,7 +80,7 @@ module.exports = {
                 return res.status(404).json({
                     message: 'Friend added, but no user exists with that id!'
                 })
-            }    
+            }
             res.json('Friend added!');
         } catch (err) {
             console.log(err);
@@ -101,13 +101,13 @@ module.exports = {
                 { new: true }
             );
 
-            if (!user) { 
-                return res.status(404).json({ message: 'Friend removed, but no user exists with that id!'})
+            if (!user) {
+                return res.status(404).json({ message: 'Friend removed, but no user exists with that id!' })
             }
             res.json({ message: 'Friend successfully removed.' });
         } catch (err) {
             console.log(err);
-            res.status.(500).json(err);
+            res.status(500).json(err);
         }
     }
 };
