@@ -8,6 +8,7 @@ module.exports = {
             const thoughtsData = await Thought.find();
             res.json(thoughtsData);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -22,6 +23,7 @@ module.exports = {
             }
             res.json(thought);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },

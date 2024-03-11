@@ -8,6 +8,7 @@ module.exports = {
             const usersData = await User.find();
             res.json(usersData);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -22,6 +23,7 @@ module.exports = {
             }
             res.json(user);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -31,6 +33,7 @@ module.exports = {
             const dbNewUser = await User.create(req.body);
             res.json(dbNewUser);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -70,7 +73,7 @@ module.exports = {
     },
     async addFriend(req, res) {
         try {
-            const friend = await User.create(req.body);
+            const friend = await User.findById(req.params.friendId);
             const user = await User.findOneAndUpdate(
                 { _id: req.body.userId },
                 { $addToSet: { friends: friend._id } },
@@ -89,12 +92,6 @@ module.exports = {
     },
     async removeFriend(req, res) {
         try {
-            const friend = await User.findOneAndRemove({ _id: req.params.userId });
-
-            if (!friend) {
-                return res.status(404).json({ message: 'No user exists with that id!' });
-            }
-
             const user = await User.findOneAndUpdate(
                 { friends: req.params.friendId },
                 { $pull: { friends: req.params.friendId } },
