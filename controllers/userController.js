@@ -87,7 +87,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    async removefriend(req, res) {
+    async removeFriend(req, res) {
         try {
             const friend = await User.findOneAndRemove({ _id: req.params.userId });
 
@@ -97,7 +97,7 @@ module.exports = {
 
             const user = await User.findOneAndUpdate(
                 { friends: req.params.friendId },
-                { $pull: { friends: req.params.videoId } },
+                { $pull: { friends: req.params.friendId } },
                 { new: true }
             );
 
