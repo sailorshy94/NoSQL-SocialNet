@@ -1,7 +1,5 @@
 // Schema to create User model
 const { Schema, model } = require('mongoose');
-// import Thought model
-const Thought = require('./Thought');
 
 // Schema to create User model
 const userSchema = new Schema({
@@ -26,7 +24,12 @@ const userSchema = new Schema({
         },
     },
     // (arr of _id vals ref the "Thought" model)
-    thoughts: [Thought],
+    thoughts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'thought',
+        },
+    ],
     // (arr of _id vals ref the "User" model (self-reference))
     friends: [
         {
@@ -34,21 +37,22 @@ const userSchema = new Schema({
             ref: 'user'
         }
     ],
-    // allows virtuals to be included w/ res
-    toJSON: {
-        virtuals: true,
-        getters: true,
-    },
-    id: false,
-});
+},
+    {
+        toJSON: {
+            virtuals: true
+        },
+        id: false
+    });
 
 // schema settings = virtual property "friendCount" that retreives length of the user's "friends" arr
 userSchema
     .virtual('friendCount')
-    // getter
+    // Getter
     .get(function () {
         return this.friends.length;
     });
+
 
 // initialize model
 const User = model('user', userSchema);

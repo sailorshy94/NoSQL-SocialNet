@@ -36,11 +36,11 @@ const thoughtSchema = new Schema({
 // schema settings = create virtual called "reactionCount" that retrieves length of thought's "reactions" array
 
 thoughtSchema
-  .virtual('reactionCount')
-  // getter
-  .get(function () {
-    return this.reactions.length;
-  });
+    .virtual('reactionCount')
+    // getter
+    .get(function () {
+        return this.reactions.length;
+    });
 
 // initialize model
 const Thought = model('thought', thoughtSchema);
