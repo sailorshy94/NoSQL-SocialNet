@@ -11,13 +11,14 @@ const {
 } = require('../../controllers/thoughtController');
 
 // path for /api/thoughts
-// get all thoughts, create new thought, get single thought, update thought, remove thought 
-router.route('/thoughts').get(getAllThoughts).post(newThought);
+// get all thoughts, create new thought
+router.route('/').get(getAllThoughts).post(newThought);
 
 // path for /api/thoughts/:thoughtId
-router.route('/thoughts/:thoughtId').get(getOneThought).put(updateThought).delete(removeThought);
+// get single thought, update thought, remove thought 
+router.route('/:thoughtId').get(getOneThought).put(updateThought).delete(removeThought);
 
 // path for /api/thoughts/:thoughtId/reactions
-router.route('/thoughts/:thoughtId/reactions').post(addReaction).delete(removeReaction);
+router.route('/:thoughtId/reactions').post(addReaction).delete(removeReaction);
 
 module.exports = router;

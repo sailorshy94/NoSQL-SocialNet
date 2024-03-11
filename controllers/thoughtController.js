@@ -30,7 +30,7 @@ module.exports = {
         try {
             const thought = await Thought.create(req.body);
             const user = await User.findOneAndUpdate(
-                { _id: req.body.userId },
+                { username: req.body.username },
                 // $addToSet = Mongoose docs "Adds elements to an array only if they do not already exist in the set."
                 // push created thought's _id to assoc user's thoughts array field
                 { $addToSet: { thoughts: thought._id } },
