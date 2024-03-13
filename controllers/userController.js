@@ -65,7 +65,7 @@ module.exports = {
                 return res.status(404).json({ message: 'This user does not exist!' });
             }
             // added in success msg for deletion
-            res.json({ message: 'User successfully deleted.' });
+            res.json({ message: 'User was deleted!' });
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
@@ -73,10 +73,9 @@ module.exports = {
     },
     async addFriend(req, res) {
         try {
-            const friend = await User.findById(req.params.friendId);
             const user = await User.findOneAndUpdate(
-                { _id: req.body.userId },
-                { $addToSet: { friends: friend._id } },
+                { _id: req.params.userId },
+                { $addToSet: { friends: req.params.friendId } },
                 { new: true }
             );
             if (!user) {
@@ -84,7 +83,7 @@ module.exports = {
                     message: 'Friend added, but no user exists with that id!'
                 })
             }
-            res.json('Friend added!');
+            res.json(user);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
@@ -93,7 +92,7 @@ module.exports = {
     async removeFriend(req, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { _id: req.params.friendId },
+                { _id: req.params.userId },
                 { $pull: { friends: req.params.friendId } },
                 { new: true }
             );
