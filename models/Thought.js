@@ -1,7 +1,7 @@
 // Schema to create Thought model
 const { Schema, model } = require('mongoose');
 // have to import Reaction schema
-const Reaction = require('./Reaction');
+const reactionSchema = require('./Reaction');
 
 // Schema to create Thought model
 const thoughtSchema = new Schema({
@@ -14,15 +14,16 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (date) => new Date(date).toISOString(),
-        // use getter method to format timestamp on query??
+        // wrapping date object in Date constructor fixes console err msg
+        // TODO: fix date - not sure if actually need this??
+        // get: (date) => new Date(date).toISOString(),
     },
     username: {
         type: String,
         required: true,
     },
     // arr of nested docs created w/ reactionSchema
-    reactions: [Reaction],
+    reactions: [reactionSchema],
 },
     {
         toJSON: {

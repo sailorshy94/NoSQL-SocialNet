@@ -32,7 +32,7 @@ module.exports = {
         try {
             const thought = await Thought.create(req.body);
             const user = await User.findOneAndUpdate(
-                { username: req.body.username },
+                { _id: req.body.userId },
                 // $addToSet = Mongoose docs "Adds elements to an array only if they do not already exist in the set."
                 // push created thought's _id to assoc user's thoughts array field
                 { $addToSet: { thoughts: thought._id } },
@@ -77,7 +77,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No thought found with this id!' });
             }
             // also have to reference user attached to thought
-            const user = await User.findOneUpdate(
+            const user = await User.findOneAndUpdate(
                 { thoughts: req.params.thoughtId },
                 { $pull: { thoughts: req.params.thoughtId } },
                 { new: true }
