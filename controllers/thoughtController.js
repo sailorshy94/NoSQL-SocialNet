@@ -28,6 +28,7 @@ module.exports = {
         }
     },
     // creates new thought
+    // TODO: troubleshoot = new thought has err msg 404
     async newThought(req, res) {
         try {
             const thought = await Thought.create(req.body);
