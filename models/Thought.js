@@ -14,9 +14,6 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // wrapping date object in Date constructor fixes console err msg
-        // TODO: fix date - not sure if actually need this??
-        get: (date) => new Date(date).toISOString(),
     },
     username: {
         type: String,
