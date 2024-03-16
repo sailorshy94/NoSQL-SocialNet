@@ -9,5 +9,5 @@ The requirement of this challenge, was to build an API for a social network appl
 ![httpie]()  
 
 ## Links
-[GitHub Repo]('https://github.com/sailorshy94/NoSQL-SocialNet')  
-[Walkthrough Video]()
+[GitHub Repo](https://github.com/sailorshy94/NoSQL-SocialNet)  
+[Walkthrough Video](https://drive.google.com/file/d/1tu5Q0YOPnm24z4R3GCu3UVmq-B52gQRn/view)
